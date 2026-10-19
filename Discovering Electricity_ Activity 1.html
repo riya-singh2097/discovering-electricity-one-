@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Discovering Electricity: Activity 1</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+:root{--bg:#fff7e0;--ink:#1b2340;--mut:#4b5575;--panel:#fff;--line:#1b2340;--blue:#2f6bff;--pink:#ff4f8b;--green:#18b45b;--yellow:#ffc928;--purple:#7b4dff;--red:#e8333a;--board:#e8f3ff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121a33;--ink:#f4f6ff;--mut:#b6c0e6;--panel:#1c2750;--line:#9fb3ff;--board:#162044}}
+:root[data-theme="dark"]{--bg:#121a33;--ink:#f4f6ff;--mut:#b6c0e6;--panel:#1c2750;--line:#9fb3ff;--board:#162044}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 clamp(18px,1.5vw,22px)/1.5 "Atkinson Hyperlegible",system-ui,sans-serif}
+h1,h2,h3{font-family:Fredoka,"Trebuchet MS",sans-serif;font-weight:600;line-height:1.15;margin:0}
+.wrap{max-width:1300px;margin:0 auto;padding:0 clamp(14px,3vw,36px) 60px}
+.hero{background:linear-gradient(120deg,var(--blue),var(--purple) 55%,var(--pink));color:#fff;border-radius:0 0 28px 28px;padding:34px clamp(18px,4vw,48px) 44px;position:relative;overflow:hidden}
+.hero h1{font-size:clamp(34px,5vw,64px);color:#fff}
+.hero p{max-width:60ch;margin:10px 0 0;font-size:1.1em}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:14px;height:10px;background:radial-gradient(circle,var(--yellow) 4px,transparent 5px) 0 0/28px 10px repeat-x;animation:run 1.2s linear infinite}
+@keyframes run{to{background-position:28px 0}}
+@media (prefers-reduced-motion:reduce){.hero::after{animation:none}}
+h2{font-size:clamp(26px,3vw,40px);margin:52px 0 14px;display:inline-block;padding:6px 18px;border-radius:14px;color:#fff;background:var(--blue)}
+h2.g{background:var(--green)}h2.p{background:var(--pink)}h2.y{background:var(--yellow);color:#1b2340}h2.v{background:var(--purple)}
+.box{background:var(--panel);border:3px solid var(--line);border-radius:18px;padding:16px 18px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.c1{border-color:var(--blue)}.c2{border-color:var(--pink)}.c3{border-color:var(--green)}
+.big{font-size:1.25em}
+.kit{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.card{border:3px solid var(--line);border-radius:18px;background:var(--panel);padding:12px;font:inherit;color:inherit;cursor:pointer;text-align:center;transition:transform .15s}
+.card:hover{transform:translateY(-4px) rotate(-1deg)}
+.card .ic{font-size:44px;display:block}
+.card b{font-family:Fredoka,sans-serif;display:block}
+.card small{color:var(--mut)}
+.card.today{background:var(--yellow);color:#1b2340;border-color:#1b2340}
+.card.today small{color:#1b2340}
+.card.sel{outline:5px solid var(--pink)}
+button:focus-visible,svg [tabindex]:focus-visible,input:focus-visible{outline:4px solid var(--pink);outline-offset:2px}
+button.b{font:600 1em Fredoka,sans-serif;padding:12px 20px;min-height:54px;border-radius:14px;border:3px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+button.b.p{background:var(--green);color:#fff;border-color:var(--green)}
+button.b.q{background:var(--pink);color:#fff;border-color:var(--pink)}
+button.b.v{background:var(--purple);color:#fff;border-color:var(--purple)}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+.stage{background:var(--board);border:3px solid var(--line);border-radius:18px;padding:6px}
+svg{width:100%;height:auto;display:block;touch-action:manipulation}
+text{font-family:Fredoka,sans-serif;fill:var(--ink)}
+.lab{display:grid;grid-template-columns:minmax(280px,380px) 1fr;gap:18px;align-items:start}
+@media (max-width:900px){.lab{grid-template-columns:1fr}}
+ol.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+ol.steps li{border:3px solid var(--line);border-radius:16px;padding:10px 14px;background:var(--panel);opacity:.65}
+ol.steps li.cur{opacity:1;border-color:var(--pink);box-shadow:0 0 0 4px color-mix(in srgb,var(--pink) 30%,transparent)}
+ol.steps li.done{opacity:1;border-color:var(--green)}
+ol.steps li .t{display:flex;gap:10px;align-items:center;font-weight:700}
+ol.steps li i{flex:none;width:32px;height:32px;border-radius:50%;background:var(--line);color:var(--bg);display:grid;place-items:center;font-style:normal}
+ol.steps li.done i{background:var(--green);color:#fff}
+ol.steps li.cur i{background:var(--pink);color:#fff}
+ol.steps li p{display:none;margin:8px 0 0;color:var(--mut);font-size:.95em}
+ol.steps li.cur p{display:block}
+.status{margin-top:12px;padding:14px 18px;border-radius:16px;border:3px solid var(--line);font-weight:700;font-size:1.1em;background:var(--panel)}
+.status.ok{background:var(--green);color:#fff;border-color:var(--green)}.status.bad{background:var(--red);color:#fff;border-color:var(--red)}.status.warn{background:var(--yellow);color:#1b2340;border-color:#1b2340}
+.term{cursor:pointer}.term .h{fill:#fff;stroke:#1b2340;stroke-width:5}
+.term.sel .h{fill:var(--yellow);stroke:var(--pink);stroke-width:8}
+.term .pulse{fill:none;stroke:var(--pink);stroke-width:4;opacity:0}
+.term.sel .pulse{opacity:1;animation:pu 1s ease-out infinite}
+@keyframes pu{from{r:16;opacity:1}to{r:40;opacity:0}}
+.wire{fill:none;stroke-width:10;stroke-linecap:round;cursor:pointer}
+.wire.r{stroke:var(--red)}.wire.k{stroke:#222}.wire.g{stroke:#7a8296}
+.glow{animation:gl 1s ease-in-out infinite alternate;transform-origin:400px 95px}
+@keyframes gl{from{opacity:.35;transform:scale(.92)}to{opacity:.75;transform:scale(1.08)}}
+@media (prefers-reduced-motion:reduce){.glow,.term.sel .pulse{animation:none}}
+input[type=range]{width:min(260px,60vw);height:36px;accent-color:var(--pink)}
+.say{font-size:1.1em}.worlds{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media (max-width:800px){.worlds{grid-template-columns:1fr}}.worlds h3{margin:0 0 6px}
+</style>
+</head>
+<body>
+<div class="hero">
+<h1>Discovering Electricity ⚡</h1>
+<p>Introduction + Activity 1. Learn what electricity really is, meet the parts in your kit, then light up your first LED.</p>
+</div>
+<div class="wrap">
+
+<h2>1. What is electricity?</h2>
+<div class="grid3">
+<div class="box c1"><h3>Everything is made of atoms</h3><p>Atoms have <b style="color:var(--red)">protons (+)</b>, <b style="color:#b88400">electrons (−)</b> and neutrons (no charge). Protons stay in the middle. Electrons can move.</p></div>
+<div class="box c2"><h3>Electricity = moving electrons</h3><p>When electrons all flow the same way through a material, that flow is <b>electricity</b>. That is why it is called electr-icity!</p></div>
+<div class="box c3"><h3>A battery is a pump</h3><p>A battery stores energy and pushes electrons round a path. Wires are the pipes. No path, no flow.</p></div>
+</div>
+
+<h2 class="y">Try it: push the electrons</h2>
+<div class="box">
+<div class="bar">
+<button class="b q" id="dBat" aria-pressed="false">Connect the battery</button>
+<label>Battery strength <input type="range" id="dStr" min="10" max="100" value="60"></label>
+</div>
+<div class="stage"><svg id="demo" viewBox="0 0 800 250" role="img" aria-label="A copper wire with atoms and electrons. Connect the battery to make the electrons flow toward the plus end and light the bulb."></svg></div>
+<p class="say big" id="dTxt" aria-live="polite"></p>
+</div>
+
+<h2 class="v">2. The water analogy 💧</h2>
+<div class="box">
+<p class="say" style="margin-top:0">Electricity behaves like water in pipes. Tap the pump, the tap or the pipe, and watch both worlds react.</p>
+<div class="bar">
+<button class="b v" id="wPump">Pump</button>
+<button class="b q" id="wTap">Tap</button>
+<button class="b" id="wBreak">Break</button>
+</div>
+<div class="worlds">
+<div><h3>💧 Water world</h3><div class="stage"><svg id="wWater" viewBox="0 0 400 300" role="img" aria-label="Water loop with pump, water wheel and tap"></svg></div></div>
+<div><h3>⚡ Electric world</h3><div class="stage"><svg id="wElec" viewBox="0 0 400 300" role="img" aria-label="Electric loop with battery, LED and switch"></svg></div></div>
+</div>
+<p class="say big" id="wTxt" aria-live="polite"></p>
+<div class="grid3" style="margin-top:12px"><div class="box c1">🔋 Battery = 💧 Pump</div><div class="box c2">〰️ Wire = Pipe</div><div class="box c3">🟡 Electrons = Water</div><div class="box c1">💡 LED = Water wheel</div><div class="box c2">🎚️ Switch = Tap</div></div>
+</div>
+
+<h2 class="g">3. Meet your kit</h2>
+<p>Tap a part to learn what it does. Yellow parts are the ones we use today.</p>
+<div class="kit" id="kit"></div>
+<div class="box c2" id="info" style="margin-top:14px" aria-live="polite"><span class="big">👆 Tap a part above.</span></div>
+<div class="box" style="margin-top:14px;border-color:var(--red)"><h3 style="color:var(--red)">⚠ Safety</h3><p style="margin:6px 0 0">Never join the two battery terminals with one wire. Put batteries in with + and − the right way. Use only parts from this kit.</p></div>
+
+<h2 class="p">4. Activity 1: Your first circuit</h2>
+<div class="box c3" style="margin-bottom:16px"><p class="say" style="margin:0"><b>A circuit</b> is a closed path for electricity. It must go from the battery’s <b style="color:var(--red)">+</b>, through the LED, and back to the battery’s <b>−</b>. If the path has a gap, it is an <b>open circuit</b> and nothing flows. If the path is complete, it is a <b>closed circuit</b>.</p></div>
+<div class="lab">
+<div>
+<ol class="steps" id="steps"></ol>
+<div class="box" style="margin-top:12px"><b>Same circuit as water 💧</b><svg id="wmini" viewBox="0 0 400 300" role="img" aria-label="Water version of your circuit"></svg>
+<p id="water" style="margin:8px 0 0;font-weight:700" aria-live="polite"></p></div>
+</div>
+<div>
+<div class="bar">
+<button class="b p" id="bBat">Insert batteries</button>
+<button class="b v" id="bShow">Show me how</button>
+<button class="b" id="bClear">Clear wires</button>
+<button class="b q" id="bSw">Add slide switch</button>
+</div>
+<div class="stage"><svg id="svg" viewBox="0 0 800 470" role="img" aria-label="Circuit board with an LED, a battery box and an optional switch. Tap two connection points to join them with a wire."></svg></div>
+<div class="status" id="status" aria-live="polite"></div>
+<p style="font-size:.95em;color:var(--mut)"><b>How:</b> tap one white dot, then another dot to join them with a wire. Tap a wire to remove it. Tap the switch lever to slide it on or off.</p>
+</div>
+</div>
+
+<h2 class="v">5. Think and talk</h2>
+<div class="grid3">
+<div class="box c1">Which parts made the path from + to −?</div>
+<div class="box c2">Remove one wire. What happens? What is this called?</div>
+<div class="box c3">Why must the red wire go to the LED’s + side?</div>
+</div>
+</div>
+
+<script>
+var KIT=[
+["🔋","Battery box","2 × 1.5 V AA","Holds two AA batteries. It is the power source (the pump) of every circuit. It has a + (red) and a − (black) side.",1],
+["🔴","Red LED","L1","LED = Light Emitting Diode. It glows when electricity flows through it the right way round: + to +, − to −.",1],
+["🎚️","Slide switch","S2","Slide it to close or open the circuit. It works like a tap: on lets electricity flow, off stops it.",1],
+["〰️","Jumper wire","Wire","A plain wire that joins two points so electricity can travel between them.",1],
+["🐊","Alligator clip wire","Wire","A wire with clips on both ends for quick, temporary connections.",1],
+["🟢","Green LED","L2","Works like the red LED but glows green.",0],
+["🔘","Push button","S1","Connects the circuit only while you press it.",0],
+["🟫","Resistors","10 kΩ · 20 kΩ · 3.3 kΩ","Limit how much electricity flows. Bigger number, more resistance.",0],
+["🎛️","Potentiometer","RV","A knob that changes resistance as you turn it.",0],
+["🌞","LDR","RL","A light sensor. Its resistance changes with how bright it is.",0],
+["⚡","Capacitor","C1 · 470 µF","Stores a little electrical energy and releases it later.",0],
+["🔔","Buzzer","Buzzer","Turns electricity into sound.",0],
+["⚙️","Motor","Motor","Turns electricity into spinning motion.",0]
+];
+var kit=document.getElementById("kit"),info=document.getElementById("info"),cur=null;
+KIT.forEach(function(k){var b=document.createElement("button");b.className="card"+(k[4]?" today":"");
+b.innerHTML='<span class="ic">'+k[0]+"</span><b>"+k[1]+"</b><small>"+k[2]+"</small>";
+b.onclick=function(){if(cur)cur.classList.remove("sel");cur=b;b.classList.add("sel");info.innerHTML='<span class="big"><b>'+k[0]+" "+k[1]+"</b> ("+k[2]+")</span><br>"+k[3]};kit.appendChild(b)});
+
+/* ---------- electron demo ---------- */
+(function(){
+var NS="http://www.w3.org/2000/svg",s=document.getElementById("demo"),on=false,E=[];
+function el(t,a,txt){var n=document.createElementNS(NS,t);for(var k in a)n.setAttribute(k,a[k]);if(txt)n.textContent=txt;s.appendChild(n);return n}
+el("rect",{x:30,y:60,width:640,height:130,rx:30,fill:"#f0b27a",stroke:"#a8642a","stroke-width":5});
+for(var i=0;i<7;i++){var x=95+i*92;el("circle",{cx:x,cy:125,r:30,fill:"#8ecae6",stroke:"#1d6fa5","stroke-width":3});el("text",{x:x,y:134,"text-anchor":"middle","font-size":28,style:"fill:#c4121a","font-weight":600},"+")}
+for(i=0;i<24;i++){var c=el("circle",{r:9,fill:"#ffd23f",stroke:"#a67800","stroke-width":2});E.push({x:50+Math.random()*600,y:75+Math.random()*100,c:c})}
+el("text",{x:50,y:42,"font-size":24},"− end");el("text",{x:650,y:42,"font-size":24,"text-anchor":"end"},"+ end");
+el("text",{x:350,y:230,"text-anchor":"middle","font-size":22},"copper wire: atoms (blue, +) and free electrons (yellow, −)");
+el("line",{x1:670,y1:125,x2:710,y2:125,stroke:"#555","stroke-width":8});
+var g1=el("circle",{cx:750,cy:125,r:60,fill:"#ffd23f",opacity:0}),g2=el("circle",{cx:750,cy:125,r:30,fill:"#fff7b0",stroke:"#555","stroke-width":5});
+var bt=document.getElementById("dBat"),sl=document.getElementById("dStr"),tx=document.getElementById("dTxt");
+function msg(){tx.textContent=on?"All the electrons drift the same way, toward +. This flow of electrons IS electricity, so the bulb lights!":"Electrons wiggle in every direction. There is no overall flow, so no electricity and the bulb stays off."}
+bt.onclick=function(){on=!on;bt.textContent=on?"Disconnect the battery":"Connect the battery";bt.setAttribute("aria-pressed",on);msg()};msg();
+function f(){var p=on?sl.value/100:0;
+E.forEach(function(e){e.x+=(Math.random()-.5)*4+p*4.5;e.y+=(Math.random()-.5)*4;if(e.y<76)e.y=76;if(e.y>174)e.y=174;if(e.x>655)e.x=45;if(e.x<45)e.x=655;e.c.setAttribute("cx",e.x);e.c.setAttribute("cy",e.y)});
+g1.setAttribute("opacity",p*.8);g2.setAttribute("fill",p>0?"#fff36b":"#ddd");requestAnimationFrame(f)}
+f()})();
+
+/* ---------- water vs electric loop ---------- */
+function loopSvg(svg,mode,st,onPump,onTap){
+var NS="http://www.w3.org/2000/svg",w=mode==="water",f=st.flow;svg.innerHTML="";
+function el(t,a,p,x){var n=document.createElementNS(NS,t);for(var k in a)n.setAttribute(k,a[k]);(p||svg).appendChild(n);if(x)n.textContent=x;return n}
+function btn(g,fn,label){if(fn){g.setAttribute("tabindex",0);g.setAttribute("role","button");g.setAttribute("aria-label",label);g.style.cursor="pointer";g.onclick=fn;g.onkeydown=function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();fn()}}}}
+var D="M50,250 L50,50 L350,50 L350,250 Z";
+if(w){el("path",{d:D,fill:"none",stroke:"#1d6fa5","stroke-width":36,"stroke-linejoin":"round"});el("path",{d:D,fill:"none",stroke:"#8fcbff","stroke-width":26,"stroke-linejoin":"round"})}
+else el("path",{d:D,fill:"none",stroke:"#222","stroke-width":8,"stroke-linejoin":"round"});
+if(st.broken){el("rect",{x:165,y:225,width:70,height:50,style:"fill:var(--board)"});el("text",{x:200,y:262,"text-anchor":"middle","font-size":40,style:"fill:#e8333a"},null,"✕");
+if(w)for(var q=0;q<3;q++){var dr=el("circle",{cx:185+q*15,cy:262,r:6,fill:"#3aa0ff"});el("animate",{attributeName:"cy",from:262,to:296,dur:"0.9s",begin:(q*0.3)+"s",repeatCount:"indefinite"},dr)}}
+if(f)for(var k=0;k<16;k++){var c=el("circle",{r:w?7:6,fill:w?"#fff":"#ffd23f",stroke:w?"#1d6fa5":"#8a6200","stroke-width":2,style:"pointer-events:none"});el("animateMotion",{dur:"5s",repeatCount:"indefinite",begin:(-k*5/16)+"s",path:D},c)}
+var pg=el("g",{});
+if(w){el("circle",{cx:50,cy:150,r:40,fill:st.pump?"#7b4dff":"#9aa0b5",stroke:"#2b1a73","stroke-width":5},pg);
+if(st.pump){var ring=el("circle",{cx:50,cy:150,r:30,fill:"none",stroke:"#fff","stroke-width":4,"stroke-dasharray":"10 10"},pg);el("animateTransform",{attributeName:"transform",type:"rotate",from:"0 50 150",to:"-360 50 150",dur:"3s",repeatCount:"indefinite"},ring)}
+el("text",{x:50,y:158,"text-anchor":"middle","font-size":20,style:"fill:#fff","font-weight":600},pg,"PUMP")}
+else{el("rect",{x:20,y:100,width:60,height:100,rx:12,fill:st.pump?"#ffc928":"#9aa0b5",stroke:"#1b2340","stroke-width":5},pg);
+el("text",{x:50,y:128,"text-anchor":"middle","font-size":28,"font-weight":600,style:"fill:#c4121a"},pg,"+");
+el("text",{x:50,y:156,"text-anchor":"middle","font-size":18,style:"fill:#1b2340"},pg,"1.5V");
+el("text",{x:50,y:188,"text-anchor":"middle","font-size":30,"font-weight":600,style:"fill:#1b2340"},pg,"−")}
+btn(pg,onPump,"Toggle "+(w?"pump":"battery"));
+var wg=el("g",{});
+if(w){var sp=el("g",{},wg);el("circle",{cx:200,cy:50,r:36,fill:"#fff",stroke:"#1d6fa5","stroke-width":5},sp);
+for(var a=0;a<4;a++){var ang=a*45*Math.PI/180;el("line",{x1:200-34*Math.cos(ang),y1:50-34*Math.sin(ang),x2:200+34*Math.cos(ang),y2:50+34*Math.sin(ang),stroke:"#1d6fa5","stroke-width":6},sp)}
+el("circle",{cx:200,cy:50,r:7,fill:"#1d6fa5"},sp);
+if(f)el("animateTransform",{attributeName:"transform",type:"rotate",from:"0 200 50",to:"360 200 50",dur:"1.6s",repeatCount:"indefinite"},sp)}
+else{if(f){var gl=el("circle",{cx:200,cy:50,r:56,fill:"#ffd23f",opacity:.5},wg);el("animate",{attributeName:"r",values:"46;62;46",dur:"1s",repeatCount:"indefinite"},gl)}
+el("circle",{cx:200,cy:50,r:30,fill:f?"#ff3b30":"#8c2b2b",stroke:"#511","stroke-width":5},wg);el("text",{x:200,y:58,"text-anchor":"middle","font-size":20,style:"fill:#fff","font-weight":600},wg,"LED")}
+var tg=el("g",{});
+if(w){el("rect",{x:326,y:122,width:48,height:56,rx:8,fill:st.tap?"#18b45b":"#e8333a",stroke:"#1b2340","stroke-width":5},tg);
+el("line",{x1:350,y1:122,x2:350,y2:st.tap?86:100,stroke:"#1b2340","stroke-width":8,"stroke-linecap":"round"},tg);
+if(!st.tap)el("line",{x1:320,y1:100,x2:380,y2:100,stroke:"#1b2340","stroke-width":8,"stroke-linecap":"round"},tg)}
+else{el("rect",{x:336,y:118,width:28,height:64,style:"fill:var(--board)"},tg);
+el("circle",{cx:350,cy:120,r:9,fill:"#fff",stroke:"#222","stroke-width":4},tg);el("circle",{cx:350,cy:180,r:9,fill:"#fff",stroke:"#222","stroke-width":4},tg);
+el("line",{x1:350,y1:180,x2:st.tap?350:384,y2:st.tap?120:134,stroke:st.tap?"#18b45b":"#e8333a","stroke-width":8,"stroke-linecap":"round"},tg)}
+el("rect",{x:305,y:80,width:90,height:130,fill:"transparent"},tg);
+btn(tg,onTap,"Toggle "+(w?"tap":"switch"));
+el("text",{x:92,y:156,"font-size":22},null,w?"Pump":"Battery");
+el("text",{x:200,y:112,"text-anchor":"middle","font-size":22},null,w?"Water wheel":"LED");
+el("text",{x:308,y:156,"text-anchor":"end","font-size":22},null,w?(st.tap?"Tap open":"Tap closed"):(st.tap?"Switch on":"Switch off"));
+el("text",{x:200,y:200,"text-anchor":"middle","font-size":28,"font-weight":600,style:"fill:"+(f?"#18b45b":"#e8333a")},null,f?(w?"Water flows!":"Electrons flow!"):"Nothing flows")}
+(function(){var st={pump:true,tap:true,broken:false},A=document.getElementById("wWater"),B=document.getElementById("wElec"),bp=document.getElementById("wPump"),bt=document.getElementById("wTap"),bb=document.getElementById("wBreak"),tx=document.getElementById("wTxt");
+function upd(){st.flow=st.pump&&st.tap&&!st.broken;loopSvg(A,"water",st,tp,tt);loopSvg(B,"elec",st,tp,tt);
+bp.textContent="Pump / Battery: "+(st.pump?"ON":"OFF");bt.textContent="Tap open / Switch on: "+(st.tap?"YES":"NO");bb.textContent=st.broken?"Fix the pipe / wire":"Break the pipe / wire";
+tx.textContent=st.broken?"Broken pipe: water leaks out and never reaches the wheel. A broken wire is an open circuit, so no electricity.":!st.pump?"Pump off: nothing pushes the water. No battery means no push for the electrons.":!st.tap?"Tap closed: the water is blocked. A switch that is off opens the circuit.":"Pump pushing, tap open, wheel spinning. Battery pushing, switch on, LED lit!"}
+function tp(){st.pump=!st.pump;upd()}function tt(){st.tap=!st.tap;upd()}
+bp.onclick=tp;bt.onclick=tt;bb.onclick=function(){st.broken=!st.broken;upd()};upd()})();
+
+/* ---------- circuit simulator ---------- */
+var P={bp:[120,400],bn:[680,400],lp:[270,95],ln:[530,95],sa:[540,255],sb:[690,255]};
+var NAME={bp:"battery +",bn:"battery −",lp:"LED +",ln:"LED −",sa:"switch left",sb:"switch right"};
+var S={w:[],sel:null,bat:false,sw:false,on:false};
+var svg=document.getElementById("svg"),NS="http://www.w3.org/2000/svg";
+function edges(fc){var e=S.w.slice();if(S.sw&&(S.on||fc))e.push(["sa","sb"]);return e}
+function dist(a,e){var d={};d[a]=0;var q=[a];while(q.length){var n=q.shift();e.forEach(function(x){var m=x[0]===n?x[1]:x[1]===n?x[0]:null;if(m&&d[m]===undefined){d[m]=d[n]+1;q.push(m)}})}return d}
+function reach(a,b,e){return dist(a,e)[b]!==undefined}
+function evalC(){var e=edges(false),f=edges(true),r={};
+r.p1=reach("bp","lp",e);r.p2=reach("ln","bn",e);r.loop=r.p1&&r.p2;
+r.short=reach("bp","bn",e);r.rev=reach("bp","ln",e)&&reach("lp","bn",e);
+r.swOff=S.sw&&!S.on&&!r.loop&&reach("bp","lp",f)&&reach("ln","bn",f);
+r.lit=S.bat&&r.loop&&!r.short;return r}
+function el(t,a,p,txt){var n=document.createElementNS(NS,t);for(var k in a)n.setAttribute(k,a[k]);(p||svg).appendChild(n);if(txt)n.textContent=txt;return n}
+function path(a,b){var A=P[a],B=P[b],m=(A[1]+B[1])/2;
+if(Math.abs(A[1]-B[1])<30)return"M"+A+" C"+A[0]+","+(A[1]+95)+" "+B[0]+","+(B[1]+95)+" "+B;
+return"M"+A+" C"+A[0]+","+m+" "+B[0]+","+m+" "+B}
+function colour(w){var s=w.join();return/bp|lp/.test(s)?"r":/bn|ln/.test(s)?"k":"g"}
+function flowPath(w,e){var a=w[0],b=w[1],dn=dist("bn",e),dp=dist("bp",e);
+if(dn[a]!==undefined||dn[b]!==undefined){if((dn[a]===undefined?99:dn[a])>(dn[b]===undefined?99:dn[b])){var t=a;a=b;b=t}}
+else if(dp[a]!==undefined||dp[b]!==undefined){if((dp[a]===undefined?-1:dp[a])<(dp[b]===undefined?-1:dp[b])){var t2=a;a=b;b=t2}}
+return path(a,b)}
+
+function draw(){var r=evalC(),e=edges(false);svg.innerHTML="";
+el("rect",{x:150,y:360,width:500,height:80,rx:16,fill:"#4a5568",stroke:"#1a202c","stroke-width":4});
+[0,1].forEach(function(i){var x=170+i*240;
+el("rect",{x:x,y:372,width:220,height:56,rx:10,fill:S.bat?"#fff3c4":"none",stroke:S.bat?"#d9a400":"#cbd5e0","stroke-width":3,"stroke-dasharray":S.bat?"0":"8 6"});
+el("text",{x:x+110,y:408,"text-anchor":"middle","font-size":26,style:"fill:"+(S.bat?"#1b2340":"#e2e8f0")},null,S.bat?"1.5V AA":"empty")});
+el("text",{x:120,y:355,"text-anchor":"middle","font-size":36,"font-weight":600,style:"fill:var(--red)"},null,"+");
+el("text",{x:680,y:358,"text-anchor":"middle","font-size":40,"font-weight":600},null,"−");
+el("text",{x:400,y:462,"text-anchor":"middle","font-size":22},null,"Battery box");
+el("rect",{x:300,y:55,width:200,height:80,rx:16,fill:"#18b45b",stroke:"#0b6b34","stroke-width":4});
+if(r.lit){el("circle",{cx:400,cy:95,r:75,fill:"#ffd23f",class:"glow"})}
+el("circle",{cx:400,cy:95,r:28,fill:r.lit?"#ff3b30":"#8c2b2b",stroke:"#511","stroke-width":3});
+el("text",{x:322,y:106,"font-size":32,"font-weight":600,"text-anchor":"middle",style:"fill:#fff"},null,"+");
+el("text",{x:480,y:108,"font-size":36,"font-weight":600,"text-anchor":"middle",style:"fill:#fff"},null,"−");
+el("text",{x:400,y:168,"text-anchor":"middle","font-size":24},null,"Red LED (L1)");
+if(S.sw){el("rect",{x:540,y:225,width:150,height:60,rx:12,fill:"#9aa5b1",stroke:"#3d464d","stroke-width":4});
+el("rect",{x:572,y:238,width:86,height:34,rx:17,fill:"#222"});
+var lev=el("rect",{x:S.on?618:576,y:241,width:36,height:28,rx:12,fill:S.on?"#18b45b":"#f0f0f0",tabindex:0,role:"button","aria-label":"Slide switch, currently "+(S.on?"on":"off"),style:"cursor:pointer"});
+lev.onclick=function(){S.on=!S.on;draw()};lev.onkeydown=function(ev){if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();lev.onclick()}};
+el("text",{x:615,y:318,"text-anchor":"middle","font-size":24},null,"Switch "+(S.on?"ON = closed":"OFF = open"))}
+S.w.forEach(function(w,i){var d=path(w[0],w[1]);
+var p=el("path",{d:d,class:"wire "+colour(w),tabindex:0,role:"button","aria-label":"Remove wire from "+NAME[w[0]]+" to "+NAME[w[1]]});
+p.onclick=function(){S.w.splice(i,1);S.sel=null;draw()};p.onkeydown=function(ev){if(ev.key==="Enter")p.onclick()};
+if(r.lit){var fd=flowPath(w,e);for(var k=0;k<6;k++){var c=el("circle",{r:7,fill:"#ffd23f",stroke:"#8a6200","stroke-width":2,style:"pointer-events:none"});
+var am=el("animateMotion",{dur:"2.4s",repeatCount:"indefinite",begin:(-k*0.4)+"s",path:fd},c)}}});
+Object.keys(P).forEach(function(k){if((k==="sa"||k==="sb")&&!S.sw)return;
+var g=el("g",{class:"term"+(S.sel===k?" sel":""),tabindex:0,role:"button","aria-label":"Connection point "+NAME[k]});
+el("circle",{cx:P[k][0],cy:P[k][1],r:32,fill:"transparent"},g);
+el("circle",{cx:P[k][0],cy:P[k][1],r:16,class:"pulse"},g);
+el("circle",{cx:P[k][0],cy:P[k][1],r:16,class:"h"},g);
+function hit(){if(!S.sel){S.sel=k}else if(S.sel===k){S.sel=null}else{var a=S.sel,dup=S.w.some(function(w){return(w[0]===a&&w[1]===k)||(w[0]===k&&w[1]===a)});if(!dup)S.w.push([a,k]);S.sel=null}draw()}
+g.onclick=hit;g.onkeydown=function(ev){if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();hit()}}});
+report(r)}
+
+function report(r){var st=document.getElementById("status"),m,c;
+if(r.short){m="⚠ Short circuit! Battery + and − are joined with no LED between them. Remove that wire.";c="bad"}
+else if(r.lit){m="✅ Closed circuit! There is a complete path from + to −, so electrons flow and the LED lights.";c="ok"}
+else if(r.rev&&!r.loop){m="🔄 The LED is backwards. Battery + goes to LED +, and LED − goes to battery −.";c="bad"}
+else if(r.swOff){m="🚪 Open circuit. The switch is off, so the path has a gap. Slide it on.";c="warn"}
+else if(r.loop&&!S.bat){m="The path is complete. Now insert the batteries.";c="ok"}
+else{m="🚧 Open circuit. There is a gap in the path, so nothing flows. Join + to + and − to −.";c="warn"}
+st.className="status "+c;st.textContent=m;
+var steps=[["Red wire: battery + to LED +",r.p1,"Electrons need a path. Start on the + side: join the battery’s + dot to the LED’s + dot."],
+["Black wire: LED − to battery −",r.p2,"Now finish the loop on the − side. A complete loop from + to − makes a closed circuit."],
+["Insert the batteries",S.bat,"The batteries are the pump. Always wire first and insert batteries last, with + and − the right way round."],
+["Watch the LED light up!",r.lit,"Electrons flow round the loop and the LED turns that energy into light."]];
+var first=-1;steps.forEach(function(s,i){if(first<0&&!s[1])first=i});
+document.getElementById("steps").innerHTML=steps.map(function(s,i){return'<li class="'+(s[1]?"done":i===first?"cur":"")+'"><div class="t"><i>'+(s[1]?"✓":i+1)+"</i><span>"+s[0]+"</span></div><p>"+s[2]+"</p></li>"}).join("");
+document.getElementById("water").textContent=r.lit?"Tap open, pump pushing, wheel spinning!":S.sw&&!S.on?"Tap closed. The wheel cannot spin.":"The pipe has a break, so the water cannot flow.";
+loopSvg(document.getElementById("wmini"),"water",{pump:S.bat,tap:!S.sw||S.on,broken:!r.loop&&!r.swOff,flow:r.lit});
+document.getElementById("bBat").textContent=S.bat?"Remove batteries":"Insert batteries"}
+
+document.getElementById("bBat").onclick=function(){S.bat=!S.bat;draw()};
+document.getElementById("bClear").onclick=function(){S.w=[];S.sel=null;draw()};
+document.getElementById("bShow").onclick=function(){S.w=S.sw?[["bp","lp"],["ln","sa"],["sb","bn"]]:[["bp","lp"],["ln","bn"]];S.sel=null;draw()};
+document.getElementById("bSw").onclick=function(){S.sw=!S.sw;S.on=false;S.w=[];S.sel=null;this.textContent=S.sw?"Remove slide switch":"Add slide switch";draw()};
+draw();
+</script>
+</body>
+</html>
